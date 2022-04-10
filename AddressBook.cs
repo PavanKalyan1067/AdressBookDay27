@@ -18,6 +18,12 @@ namespace AddressBooks
         public List<AddrBook> stateList;
         public List<AddrBook> cityList;
         public List<AddrBook> people;
+
+        internal static void GetCustomer()
+        {
+            throw new NotImplementedException();
+        }
+
         public AddrBook()
         {
             people = new List<AddrBook>();
