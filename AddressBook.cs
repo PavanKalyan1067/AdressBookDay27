@@ -135,6 +135,12 @@ namespace AddressBooks
             Console.WriteLine("Email Id: " + person.emailId);
             Console.WriteLine("-------------------------------------------");
         }
+
+        internal static void SortContactPerson(Dictionary<string, List<AddrBook>> addressBook)
+        {
+            throw new NotImplementedException();
+        }
+
         //Modify the details
         public void Modify()
         {
