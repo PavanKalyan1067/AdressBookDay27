@@ -135,12 +135,6 @@ namespace AddressBooks
             Console.WriteLine("Email Id: " + person.emailId);
             Console.WriteLine("-------------------------------------------");
         }
-
-        internal static void SortContactPerson(Dictionary<string, List<AddrBook>> addressBook)
-        {
-            throw new NotImplementedException();
-        }
-
         //Modify the details
         public void Modify()
         {
@@ -210,6 +204,27 @@ namespace AddressBooks
                 }
             }
         }
+
+        internal static void SortBasedOnZipCode(Dictionary<string, List<AddrBook>> addressBook)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void SortBasedOnState(Dictionary<string, List<AddrBook>> addressBook)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void SortBasedOnCity(Dictionary<string, List<AddrBook>> addressBook)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void SortContactPerson(Dictionary<string, List<AddrBook>> addressBook)
+        {
+            throw new NotImplementedException();
+        }
+
         //Listing the user entered details or modified details
         public void ListingPeople()
         {
