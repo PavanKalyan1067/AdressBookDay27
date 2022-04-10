@@ -7,8 +7,9 @@ namespace AddressBooks
         static void Main(string[] args)
         {
 
-            AddressBooks.AddrBook.GetCustomer();
-            AddressBooks.AddrBook.ListingPeople();
+            Console.WriteLine("Welcome To Address Book System!");
+            AddrBook.GetCustomer();
+            AddrBook.ListingPeople();
 
         }
     }
