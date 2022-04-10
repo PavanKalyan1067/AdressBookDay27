@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace AddressBooks
 {
@@ -138,6 +139,24 @@ namespace AddressBooks
                 }
 
 
+            }
+        }
+        //Removing the detail
+        public static void RemovePeople()
+        {
+            Console.WriteLine("Enter the first name of the person you would like to remove.");
+            string Remove = Console.ReadLine();
+            foreach (var person in People.ToList())
+            {
+                if (person.FirstName.ToUpper() == Remove.ToUpper())
+                {
+                    People.Remove(person);
+                    Console.WriteLine("Contact is deleted");
+                }
+                else
+                {
+                    Console.WriteLine("Contact is not present");
+                }
             }
         }
         public static void ListingPeople()
