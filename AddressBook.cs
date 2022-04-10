@@ -18,12 +18,6 @@ namespace AddressBooks
         public List<AddrBook> stateList;
         public List<AddrBook> cityList;
         public List<AddrBook> people;
-
-        internal static void GetCustomer()
-        {
-            throw new NotImplementedException();
-        }
-
         public AddrBook()
         {
             people = new List<AddrBook>();
@@ -51,26 +45,81 @@ namespace AddressBooks
         //Getting the user details
         public void GetCustomer(string firstName, string lastName, string phoneNum, string address, string city, string state, string zipCode, string emailId)
         {
-
+            int contact = 0;
             AddrBook person = new AddrBook(firstName, lastName, phoneNum, address, city, state, zipCode, emailId);
-            if (people.Count == 0)
+            if (contact == 0)
             {
+
                 people.Add(person);
-            }
-            else
-            {
-                AddrBook people = this.people.Find(a => a.firstName.Equals(firstName));
-                if (people == null)
+                if (State.ContainsKey(state))
                 {
-                    AddrBook p = new AddrBook(firstName, lastName, address, city, state, phoneNum, zipCode, emailId);
-                    this.people.Add(p);
+                    List<AddrBook> existing = State[state];
+                    existing.Add(person);
+
                 }
                 else
                 {
-                    Console.WriteLine("-------Record is already exists-------");
-                    Console.WriteLine("Modify the details which has duplicate name");
-                    Modify();
+                    stateList = new List<AddrBook>();
+                    stateList.Add(person);
+                    State.Add(state, stateList);
+
                 }
+                if (City.ContainsKey(city))
+                {
+                    List<AddrBook> existing = City[city];
+                    existing.Add(person);
+
+                }
+                else
+                {
+                    cityList = new List<AddrBook>();
+                    cityList.Add(person);
+                    City.Add(city, cityList);
+
+                }
+                contact++;
+            }
+            else if (contact != 0)
+            {
+                //Checking duplicates
+                AddrBook addressBookSystems = people.Find(x => x.firstName.Equals(firstName));
+                if (addressBookSystems == null)
+                {
+                    person = new AddrBook(firstName, lastName, address, city, state, zipCode, phoneNum, emailId);
+                    people.Add(person);
+                    if (State.ContainsKey(state))
+                    {
+                        List<AddrBook> existing = State[state];
+                        existing.Add(person);
+
+                    }
+                    else
+                    {
+                        stateList = new List<AddrBook>();
+                        stateList.Add(person);
+                        State.Add(state, stateList);
+
+                    }
+                    if (City.ContainsKey(city))
+                    {
+                        List<AddrBook> existing = City[city];
+                        existing.Add(person);
+
+                    }
+                    else
+                    {
+                        cityList = new List<AddrBook>();
+                        cityList.Add(person);
+                        City.Add(city, cityList);
+
+                    }
+                    contact++;
+                }
+                else
+                {
+                    Console.WriteLine("This person already exists in your AddressBook!");
+                }
+
             }
         }
         //Print the details
@@ -192,6 +241,7 @@ namespace AddressBooks
 
             }
         }
+        //Display Person names found in given City
         public static void StoreCityList(string key, List<AddrBook> cityList, string city)
         {
             List<AddrBook> CityList = cityList.FindAll(a => a.city.ToLower() == city);
@@ -208,6 +258,37 @@ namespace AddressBooks
             {
                 Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in State {2}", i.firstName, key, i.state);
             }
+        }
+        public static void DisplayCityorState()
+        {
+            Console.WriteLine("Enter 1-To view City list\n Enter 2-To view State list");
+            int citystate = Convert.ToInt32(Console.ReadLine());
+            if (citystate == 1)
+            {
+                foreach (var i in City)
+                {
+                    Console.WriteLine("Display List for City: {0}\n", i.Key);
+                    foreach (var j in i.Value)
+                    {
+                        Console.WriteLine("Found person \"{0} {1}\" , residing in City {2}", j.firstName, j.lastName, j.city);
+                    }
+
+
+                }
+            }
+            else
+            {
+                foreach (var a in State)
+                {
+                    Console.WriteLine("Display List for State: {0}\n", a.Key);
+                    foreach (var b in a.Value)
+                    {
+                        Console.WriteLine("Found person \"{0} {1}\" , residing in State {2}", b.firstName, b.lastName, b.state);
+                    }
+
+                }
+            }
+
         }
     }
 }
