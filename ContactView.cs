@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using CsvHelper;
+using static AddressBook.Contacts;
 
 namespace AddressBook
 {
@@ -236,7 +237,7 @@ namespace AddressBook
         public void ImportContacts(string addressBookName, Dictionary<string, List<Contacts>> addressBook)
         {
             List<Contacts> contactsList = addressBook[addressBookName];
-            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27/Contacts.csv";
+            string filepath = @"C:\Users\Admin\Desktop\BridgeLabs Assignments\AddressBook\AddressBook\AddressBook\ContactsCSVFile.csv";
             if (filepath.EndsWith(".csv") && File.Exists(filepath))
             {
                 string[] contactsArray = File.ReadAllLines(filepath);
@@ -269,7 +270,7 @@ namespace AddressBook
         public void ExportContacts(List<Contacts> contactsList)
         {
             string[] contactArray = new string[contactsList.Count];
-            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27/Contacts.csv";
+            string filepath = @"C:\Users\Admin\Desktop\BridgeLabs Assignments\AddressBook\AddressBook\AddressBook\ContactsCSVFile.csv";
             if (filepath.EndsWith(".csv") && File.Exists(filepath))
             {
                 for (int i = 0; i < contactsList.Count; i++)
@@ -285,6 +286,38 @@ namespace AddressBook
                 Console.WriteLine("File not found");
             }
 
+        }
+
+        /// <summary>
+        /// ability to read contacts list from json file
+        /// </summary>
+        /// <param name="contactlist"></param>
+        public void GetJsonData(List<Contacts> contactlist)
+        {
+            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27
+Json.json";
+            string jObject = File.ReadAllText(filepath);
+            Root root = JsonConvert.DeserializeObject<Root>(jObject);
+            contactlist.AddRange(root.contacts);
+            Console.WriteLine("Import successfull");
+        }
+        /// <summary>
+        /// ability to write contacts list to json file
+        /// </summary>
+        /// <param name="contactlist"></param>
+        public void SetJsonData(List<Contacts> contactlist)
+        {
+            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27
+Json.json";
+            Contacts contact = NewContact(contactlist);
+            contactlist.Add(contact);
+            Root root = new Root
+            {
+                contacts = contactlist
+            };
+            string contactdata = JsonConvert.SerializeObject(root, Formatting.Indented);
+            File.WriteAllText(filepath, contactdata);
+            Console.WriteLine("Emport successfull");
         }
     }
 }

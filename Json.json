@@ -1,0 +1,24 @@
+{
+  "contacts": [
+    {
+      "FirstName": "Pavan",
+      "LastName": "kalyan",
+      "Address": "somewhere",
+      "City": "hyd",
+      "State": "ts",
+      "ZipCode": 123456,
+      "PhoneNumber": 12345678910,
+      "Email": "pk1@gmail.com"
+    },
+    {
+      "FirstName": "afadssf",
+      "LastName": "afdaaf",
+      "Address": "adsfabfd",
+      "City": "asdfasdsf",
+      "State": "adfadsaf",
+      "ZipCode": 1324122,
+      "PhoneNumber": 1311414143,
+      "Email": "faafafasf"
+    }
+  ]
+}

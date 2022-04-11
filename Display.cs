@@ -96,9 +96,11 @@ namespace AddressBook
             Console.WriteLine("press 3 to Edit Contact in list.");
             Console.WriteLine("press 4 to Delete a Contact from list.");
             Console.WriteLine("press 5 to Sort Contacts");
-            Console.WriteLine("press 6 to Import Contacts");
-            Console.WriteLine("press 7 to Export Contacts.");
-            Console.WriteLine("press 8 to go back.");
+            Console.WriteLine("press 6 to Import Contacts from csv file");
+            Console.WriteLine("press 7 to Export Contacts to csv file.");
+            Console.WriteLine("press 8 to get contact from json file");
+            Console.WriteLine("press 9 to set contascts to json file.");
+            Console.WriteLine("press 10 to go back.");
         }
         /// <summary>
         /// switch case statement process for functionality performs crud operations for contacts
@@ -111,7 +113,7 @@ namespace AddressBook
                 Dictionary<string, List<Contacts>> addressBook = multipleAddressBook.GetAddressBook();
                 //validation for input.
                 int input = Convert.ToInt32(Console.ReadLine());
-                while (input > 8 || input <= 0)
+                while (input > 9 || input <= 0)
                 {
                     Console.WriteLine("invalid input");
                     Console.WriteLine("Enter a valid input ");
@@ -171,7 +173,7 @@ namespace AddressBook
                         Selection(addressBookName);
                         break;
                     case 6:
-                        //Import contacts from a file
+                        //Import contacts from a csvfile
                         contactView.ImportContacts(addressBookName, addressBook);
                         Console.WriteLine("Import SuccessFull!!");
                         DisplayChoice();
@@ -179,13 +181,27 @@ namespace AddressBook
                         break;
                     case 7:
                         contacts = addressBook[addressBookName];
-                        //Export contacts from a file
+                        //Export contacts from a csvfile
                         contactView.ExportContacts(contacts);
                         Console.WriteLine("Export SuccessFull!!");
                         DisplayChoice();
                         Selection(addressBookName);
                         break;
                     case 8:
+                        contacts = addressBook[addressBookName];
+                        //get contacts from json file
+                        contactView.GetJsonData(contacts);
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 9:
+                        contacts = addressBook[addressBookName];
+                        //set contacts to json file
+                        contactView.SetJsonData(contacts);
+                        DisplayChoice();
+                        Selection(addressBookName);
+                        break;
+                    case 10:
                         //exit from Contacts
                         DisplayChoiceAddressBook();
                         break;
