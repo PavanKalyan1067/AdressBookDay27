@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using CsvHelper;
 
 namespace AddressBook
 {
@@ -228,16 +229,15 @@ namespace AddressBook
             Person.Email = Console.ReadLine();
         }
         /// <summary>
-        /// ability to import contacts from a file
+        /// ability to import contacts from a csv file
         /// </summary>
         /// <param name="addressBookName"></param>
         /// <param name="addressBook"></param>
         public void ImportContacts(string addressBookName, Dictionary<string, List<Contacts>> addressBook)
         {
             List<Contacts> contactsList = addressBook[addressBookName];
-            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27
-\FileOperation.txt";
-            if (File.Exists(filepath))
+            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27/Contacts.csv";
+            if (filepath.EndsWith(".csv") && File.Exists(filepath))
             {
                 string[] contactsArray = File.ReadAllLines(filepath);
                 for (int i = 1; i < contactsArray.Length; i++)
@@ -263,15 +263,14 @@ namespace AddressBook
             }
         }
         /// <summary>
-        /// ability to Export contacts to a file
+        /// ability to Export contacts to a csv file
         /// </summary>
         /// <param name="contactsList"></param>
         public void ExportContacts(List<Contacts> contactsList)
         {
             string[] contactArray = new string[contactsList.Count];
-            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27
-\FileOperation.txt";
-            if (File.Exists(filepath))
+            string filepath = @"/Users/nikhilgoud/Projects/Assaignments/AdressBookday27/AdressBookday27/Contacts.csv";
+            if (filepath.EndsWith(".csv") && File.Exists(filepath))
             {
                 for (int i = 0; i < contactsList.Count; i++)
                 {
@@ -279,7 +278,7 @@ namespace AddressBook
                     contactArray[i] = contact.FirstName + ',' + contact.LastName + ',' + contact.Address + ',' + contact.City + ',' + contact.State + ',' + Convert.ToString(contact.ZipCode) + ',' + Convert.ToString(contact.PhoneNumber) + ',' + contact.Email;
                 }
 
-                File.AppendAllLines(filepath, contactArray, Encoding.UTF8);
+                File.WriteAllLines(filepath, contactArray, Encoding.UTF8);
             }
             else
             {
